@@ -61,8 +61,8 @@ development:
 test:
   <<: *default
   database: naturaleza_creativa_api_test
-  username: rails
-  password: password
+  username: <%= ENV.fetch("PGUSER", "your_local_postgres_user") %>
+  password: <%= ENV.fetch("PGPASSWORD", "") %>
   host: localhost
   port: 5432
 
