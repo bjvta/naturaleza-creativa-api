@@ -46,3 +46,11 @@ group :development do
 
 end
 
+
+gem "graphql", "~> 2.4"
+
+gem "graphiql-rails", "~> 1.10"
+
+gem "sprockets-rails", "~> 3.5"
+
+gem "propshaft", "~> 1.1"
