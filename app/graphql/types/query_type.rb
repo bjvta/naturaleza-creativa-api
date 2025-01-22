@@ -27,12 +27,12 @@ module Types
     # def test_field
     #   "Hello World!"
     # end
-    field :customers, [Types::CustomerType], null: false
+    field :customers, [Types::Objects::CustomerType], null: false
     def customers
       Customer.all
     end
 
-    field :products, [Types::ProductType], null: false
+    field :products, [Types::Objects::ProductType], null: false
     def products
       Product.all
     end
