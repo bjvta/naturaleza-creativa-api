@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class NaturalezaCreativaApiSchema < GraphQL::Schema
+class NaturalezaSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
 
