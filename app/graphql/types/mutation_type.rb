@@ -6,5 +6,6 @@ module Types
     field :update_customer, mutation: Mutations::Customers::UpdateCustomer
     field :delete_customer, mutation: Mutations::Customers::DeleteCustomer
     field :create_product, mutation: Mutations::Products::CreateProduct
+    field :update_product, mutation: Mutations::Products::UpdateProduct
   end
 end
