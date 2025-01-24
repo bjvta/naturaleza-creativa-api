@@ -9,7 +9,7 @@ RSpec.describe Mutations::Orders::CreateOrder, type: :request do
     let!(:product_two) { create(:product)}
     let(:query) {
       <<~GQL
-        mutation($customerId: ID!, $products: [OrderProductInput!]){
+        mutation($customerId: ID!, $products: [OrderProductInput!]!){
           createOrder(input: {customerId: $customerId, products: $products}){
             order {
               id 
@@ -35,17 +35,17 @@ RSpec.describe Mutations::Orders::CreateOrder, type: :request do
     }
 
     it 'should return errors if customer does not exist' do
-      result = NaturalezaSchema.execute(query, variables: { customer_id: -1, products: [
-        {product_id: product_one.id, quantity: 1, price: 10}] })
+      result = NaturalezaSchema.execute(query, variables: { customerId: -1, products: [
+        {productId: product_one.id, quantity: 1, price: 10}] })
 
       order = result.dig('data', 'createOrder', 'order')
       errors = result.dig('data', 'createOrder', 'errors')
 
       expect(order).to be_nil
-      expect(errors.size).not_to eq(0)
-      # TODO: we need to add the error
+      expect(errors).not_to be_empty
     end
-    it 'should return errors if any product does not exist'
+    it 'should return errors if any product does not exist' do
+    end
     it 'should create a new order'
   end
 end

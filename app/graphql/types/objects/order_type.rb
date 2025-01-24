@@ -8,7 +8,7 @@ module Types
       field :deliverer, String, null: true
       field :total, Float, null: true
       field :customer, Types::Objects::CustomerType, null: false
-      # field :order_products, [Types::Objects::OrderProduct], null: false
+      field :products, [Types::Objects::OrderProductType], null: false
     end
   end
 end

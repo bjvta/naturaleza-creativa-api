@@ -8,5 +8,6 @@ module Types
     field :create_product, mutation: Mutations::Products::CreateProduct
     field :update_product, mutation: Mutations::Products::UpdateProduct
     field :delete_product, mutation: Mutations::Products::DeleteProduct
+    field :create_order, mutation: Mutations::Orders::CreateOrder
   end
 end
