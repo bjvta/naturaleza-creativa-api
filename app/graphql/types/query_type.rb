@@ -36,5 +36,10 @@ module Types
     def products
       Product.all
     end
+
+    field :orders, [Types::Objects::OrderType], null: false
+    def orders
+      Order.all
+    end
   end
 end
