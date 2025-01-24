@@ -23,15 +23,15 @@ module Mutations
 
         order.save!
 
-        products.each do |product|
-          product = Product.find_by!(id: product[:id])
+        products.each do |p|
+          product = Product.find_by!(id: p[:product_id])
 
           order_product = OrderProduct.new
 
           order_product.order = order
           order_product.product = product
-          order_product.quantity = product[:quantity]
-          order_product.price = product[:price]
+          order_product.quantity = p[:quantity]
+          order_product.price = p[:price]
 
           order_product.save!
         end

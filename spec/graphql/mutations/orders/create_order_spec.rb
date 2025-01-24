@@ -45,7 +45,44 @@ RSpec.describe Mutations::Orders::CreateOrder, type: :request do
       expect(errors).not_to be_empty
     end
     it 'should return errors if any product does not exist' do
+      result = NaturalezaSchema.execute(query,
+                                        variables: { customerId: customer.id, products: [
+                                          {
+                                            productId: -1,
+                                            quantity: 1,
+                                            price: 10
+                                          }
+                                        ]}
+                                        )
+
+      order = result.dig('data', 'createOrder', 'order')
+      errors = result.dig('data', 'createOrder', 'errors')
+
+      expect(order).to be_nil
+      expect(errors).not_to be_empty
     end
-    it 'should create a new order'
+    it 'should create a new order' do
+      result = NaturalezaSchema.execute(query, variables: { customerId: customer.id, products: [
+        {
+          productId: product_one.id,
+          quantity: 1,
+          price: 10
+        },
+        {
+          productId: product_two.id,
+          quantity: 2,
+          price: 20
+        }
+      ]})
+
+      order = result.dig('data', 'createOrder', 'order')
+      products = result.dig('data', 'createOrder', 'order', 'products')
+      errors = result.dig('data', 'createOrder', 'errors')
+
+      expect(order).not_to be_nil
+      expect(order["total"]).to eq(30)
+      expect(products.size).to eq(2)
+      expect(errors).to be_empty
+    end
   end
 end

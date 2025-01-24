@@ -9,6 +9,10 @@ module Types
       field :total, Float, null: true
       field :customer, Types::Objects::CustomerType, null: false
       field :products, [Types::Objects::OrderProductType], null: false
+
+      def products
+        object.order_products
+      end
     end
   end
 end
