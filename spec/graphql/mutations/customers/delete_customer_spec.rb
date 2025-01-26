@@ -7,12 +7,12 @@ RSpec.describe "DeleteCustomer Mutation", type: :request do
 
   it 'should return success deletion' do
     query = <<-GQL
-mutation {
-  deleteCustomer(input: {id: #{customer.id}}){
-    result
-    message
-  }
-}
+        mutation {
+          deleteCustomer(input: {id: #{customer.id}}){
+            result
+            message
+          }
+        }
     GQL
 
     expect{
@@ -26,12 +26,12 @@ mutation {
 
   it 'should return error for the deletion' do
     query = <<-GQL
-mutation {
-  deleteCustomer(input: { id: -1}){
-    result
-    message
-  }
-}
+      mutation {
+        deleteCustomer(input: { id: -1}){
+          result
+          message
+        }
+      }
     GQL
 
     post '/graphql', params: { query: query }
